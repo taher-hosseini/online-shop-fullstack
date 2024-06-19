@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, {useContext, useEffect} from 'react';
 import './ProductList.css';
 import { ProductContext } from '../contexts/ProductContext';
 import { CartContext } from '../contexts/CartContext';
@@ -17,6 +17,9 @@ const ProductList = () => {
         }
         return text.substring(0, maxLength) + '...';
     };
+    useEffect(() => {
+        filteredProductList()
+    }, []);
 
     const filteredProductList = !selectedCategory || selectedCategory==='همه'
         ? productList
