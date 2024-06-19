@@ -19,7 +19,7 @@ export const ProductProvider = ({ children }) => {
         };
 
         fetchProducts();
-    }, [productList]);
+    }, []);
 
     useEffect(() => {
         if (selectedCategory) {
