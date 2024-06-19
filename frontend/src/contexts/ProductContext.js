@@ -11,7 +11,7 @@ export const ProductProvider = ({ children }) => {
         const fetchProducts = async () => {
             try {
                 // const response = await axios.get('http://localhost:5000/items');
-                const response = await axios.get('https://test-server-swart-chi.vercel.app/items');
+                const response = await axios.get('https://online-shop-fullstack-server.vercel.app/items');
                 setProductList(response.data);
             } catch (error) {
                 console.error('Error fetching products:', error);
