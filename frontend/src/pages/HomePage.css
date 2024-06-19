@@ -1,0 +1,58 @@
+.home-page {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.home-page h1 {
+    font-size: 3.5rem;
+    color: #333;
+}
+
+.home-page .lead {
+    font-size: 1.25rem;
+    color: #555;
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature {
+    text-align: center;
+    flex: 1;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    height: 18rem;
+}
+
+.feature i {
+    margin-bottom: 1rem;
+    color: #007bff; /* رنگ آبی برای آیکن‌ها */
+}
+
+.feature h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.feature p {
+    font-size: 1rem;
+    color: #555;
+    opacity: 0.8;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}

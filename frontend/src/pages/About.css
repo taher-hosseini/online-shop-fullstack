@@ -1,0 +1,54 @@
+.about-page {
+    padding: 4rem 0;
+}
+
+.about-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.about-content h2 {
+    font-size: 2.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.about-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+}
+
+/* SocialLinks.css */
+.social-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.social-link {
+    font-size: 32px;
+    transition: transform 0.3s, filter 0.3s;
+}
+
+.social-link:hover {
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+/* Specific hover effects for each social link */
+.github:hover {
+    filter: hue-rotate(180deg);
+}
+
+.linkedin:hover {
+    filter: hue-rotate(90deg);
+}
+
+.email:hover {
+    filter: hue-rotate(270deg);
+}
+

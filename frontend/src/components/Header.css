@@ -1,0 +1,57 @@
+.header {
+    /*background-color: var(--clr-gold);*/
+    background: url("../assets/AbstractDesign.svg") center;
+    background-size: cover;
+    object-fit: cover;
+    color: #fff;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: solid 1px var(--border-color);
+}
+
+.header .header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .header-wrapper button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #555;
+    color: #fff;
+    cursor: pointer;
+}
+.header-auth-link{
+    display: flex;
+}
+.header-auth-link a{
+    border-radius: .375rem;
+    border: solid 1px var(--border-color);
+    background-color: var(--clr-white);
+    padding: 0.3rem 0.7rem;
+    display: flex;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    align-items: center;
+    flex-direction: row;
+}
+.header-nav{
+    background-color: var(--clr-white);
+    border-radius: 2rem;
+    border: solid 2px var(--border-color-gray);
+    display: flex;
+    justify-content: space-evenly;
+    width: 25rem;
+    padding: 0.2rem 0;
+}
+.header-nav a{
+    padding: 0.3rem 0.6rem;
+}
+.header-address h1{
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 0;
+}

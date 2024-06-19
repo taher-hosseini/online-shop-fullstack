@@ -1,0 +1,99 @@
+.ProductPage-container {
+    display: flex;
+    /*gap: 2rem;*/
+    justify-content: center;
+}
+
+.ProductPage-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.ProductPage-thumbnails {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.ProductPage-thumbnail {
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.ProductPage-thumbnail.selected {
+    border-color: #485563;
+}
+
+.ProductPage-main-img {
+    border-radius: .5rem;
+    height: 18rem;
+    min-height: 15rem;
+    object-fit: cover;
+    width: 25rem;
+}
+
+.ProductPage-right {
+    /*flex: 1;*/
+    display: flex;
+    flex-direction: column;
+}
+
+.ProductPage-content-main {
+    flex: 1;
+}
+
+.ProductPage-content-main-title {
+    margin: 1.25rem 0;
+}
+
+.ProductPage-content-main-description {
+    opacity: 0.7;
+    font-size: 0.8rem;
+}
+
+.btn-grad {
+    background-image: linear-gradient(to right, #485563 0%, #29323c 51%, #485563 100%);
+    padding: 0.4rem 2.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+    margin-top: 1rem;
+}
+
+.btn-grad:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+}
+
+.ProductPage-content-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 3rem;
+}
+
+.ProductPage-content-footer-price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ProductPage-content-footer-price-caption {
+    font-size: 0.8rem;
+    opacity: 0.6;
+}

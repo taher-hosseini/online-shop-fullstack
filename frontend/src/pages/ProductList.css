@@ -1,0 +1,79 @@
+.content-item {
+    border: 1px solid var(--border-color-gray);
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.content-img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: .5rem;
+    min-height: 15rem;
+    height: 18rem;
+}
+
+.content-main {
+    flex: 1;
+}
+
+.content-main-title {
+    margin: 1.25rem 0;
+}
+
+.content-main-description {
+    opacity: 0.7;
+    font-size: .8rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* تعداد خطوط را به یک محدود می کند */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.read-more {
+    color: #007bff;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+.btn-grad {
+    background-image: linear-gradient(to right, #485563 0%, #29323c  51%, #485563  100%);
+    padding: .4rem 2.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+}
+.btn-grad:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+}
+
+.content-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content-footer-price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content-footer-price-caption {
+    font-size: .8rem;
+    opacity: 0.6;
+}
