@@ -7,8 +7,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const uri = process.env.MONGODB_URI || "mongodb+srv://taher:taher@cluster0.05owt1n.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-// const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI;
 const client = new mongodb.MongoClient(uri);
 
 const connectToDatabase = async () => {
