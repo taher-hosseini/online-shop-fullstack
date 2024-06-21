@@ -15,44 +15,52 @@ import ProductList from "./pages/ProductList";
 import About from "./pages/About";
 import PrivateComponent from './components/PrivateComponent';
 import { ProductProvider } from './contexts/ProductContext';
-import { AuthProvider, AuthContext } from './contexts/AuthContext';
+import { AuthProvider, AuthContext } from './contexts/AuthContext';  // ایمپورت AuthContext
 import CartProvider from './contexts/CartContext';
 
-const App = () => {
+const AppContent = () => {
     const location = useLocation();
     const showSidebar = location.pathname === '/products';
 
     const { isLoggedIn } = React.useContext(AuthContext);
 
     return (
+        <>
+            <Header />
+            <div className="container main-content">
+                <div className="row">
+                    {showSidebar && (
+                        <div className="col-12 col-lg-2">
+                            <Sidebar />
+                        </div>
+                    )}
+                    <div className={showSidebar ? 'col-12 col-lg-10 content' : 'col-12 col-lg-12 content'}>
+                        <Routes>
+                            <Route path="/" element={<HomePage />} />
+                            <Route path="/products" element={<ProductList />} />
+                            <Route path="/product/:id" element={<ProductPageMoreInfo />} />
+                            <Route path="/cart" element={isLoggedIn ? <CartPage /> : <Navigate to="/login" />} />
+                            <Route path="/about" element={<About />} />
+                            <Route path="/login" element={isLoggedIn ? <Navigate to="/" /> : <LoginPage />} />
+                            <Route path="/sign-up" element={isLoggedIn ? <Navigate to="/" /> : <SignUpPage />} />
+                            <Route path="/profile" element={<PrivateComponent><ProfilePage /></PrivateComponent>} />
+                        </Routes>
+                    </div>
+                </div>
+            </div>
+            <div className="container footer-content">
+                <Footer />
+            </div>
+        </>
+    );
+};
+
+const App = () => {
+    return (
         <AuthProvider>
             <ProductProvider>
                 <CartProvider>
-                    <Header />
-                    <div className="container main-content">
-                        <div className="row">
-                            {showSidebar && (
-                                <div className="col-12 col-lg-2">
-                                    <Sidebar />
-                                </div>
-                            )}
-                            <div className={showSidebar ? 'col-12 col-lg-10 content' : 'col-12 col-lg-12 content'}>
-                                <Routes>
-                                    <Route path="/" element={<HomePage />} />
-                                    <Route path="/products" element={<ProductList />} />
-                                    <Route path="/product/:id" element={<ProductPageMoreInfo />} />
-                                    <Route path="/cart" element={<CartPage />} />
-                                    <Route path="/about" element={<About />} />
-                                    <Route path="/login" element={isLoggedIn ? <Navigate to="/" /> : <LoginPage />} />
-                                    <Route path="/sign-up" element={isLoggedIn ? <Navigate to="/" /> : <SignUpPage />} />
-                                    <Route path="/profile" element={<PrivateComponent><ProfilePage /></PrivateComponent>} />
-                                </Routes>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="container footer-content">
-                        <Footer />
-                    </div>
+                    <AppContent />
                 </CartProvider>
             </ProductProvider>
         </AuthProvider>

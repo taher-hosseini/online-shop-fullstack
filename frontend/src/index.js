@@ -22,3 +22,19 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+//
+// ReactDOM.render(
+//     <React.StrictMode>
+//         <AuthProvider>
+//             <ProductProvider>
+//                 <CartProvider>
+//                     <Router>
+//                         <App />
+//                     </Router>
+//                 </CartProvider>
+//             </ProductProvider>
+//         </AuthProvider>
+//     </React.StrictMode>,
+//     document.getElementById('root')
+// );

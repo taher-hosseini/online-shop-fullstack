@@ -1,6 +1,5 @@
-// src/components/Header.js
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 import { BiLogIn } from "react-icons/bi";
 import { LuUserPlus } from "react-icons/lu";
@@ -12,14 +11,21 @@ import { FaUser } from "react-icons/fa";
 const Header = () => {
     const { isLoggedIn, logout, user } = useContext(AuthContext);
     const { cart } = useContext(CartContext);
-    const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0); // محاسبه تعداد کل آیتم‌ها در سبد خرید
+    const navigate = useNavigate();
+    const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
+
     return (
         <header className='header'>
             <div className='container header-wrapper'>
                 <div className='header-auth-link'>
                     {isLoggedIn ? (
                         <>
-                            <Link to="/profile"><span className='me-2'>{user.username}</span><FaUser /></Link>
+                            <Link to="/profile"><span className='me-2'>{user?.username}</span><FaUser /></Link>
                             <Link to="/cart">
                                 <span className='me-2'>
                                     سبد خرید
@@ -27,14 +33,14 @@ const Header = () => {
                                         <span className="badge bg-secondary ms-1">{cartItemCount}</span>
                                     )}
                                 </span>
-                                <FaShoppingCart/>
+                                <FaShoppingCart />
                             </Link>
 
-                            <button onClick={logout}>خروج</button>
+                            <button onClick={handleLogout}>خروج</button>
                         </>
                     ) : (
                         <>
-                            <Link to="/login"><span className='me-2'>ورود</span><BiLogIn/></Link>
+                            <Link to="/login"><span className='me-2'>ورود</span><BiLogIn /></Link>
                             <Link to="/sign-up"><span className='me-2'>ثبت نام</span><LuUserPlus /></Link>
                         </>
                     )}
