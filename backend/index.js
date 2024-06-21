@@ -98,7 +98,7 @@ const connectToDatabase = async () => {
         };
 
         // Read all posts
-        app.get('/posts', async (req, res) => {
+        app.get('/items', async (req, res) => {
             try {
                 const posts = await postsCollection.find().toArray();
                 res.json(posts);
@@ -108,7 +108,7 @@ const connectToDatabase = async () => {
         });
 
         // Create a new post
-        app.post('/posts', authenticateToken, async (req, res) => {
+        app.post('/items', authenticateToken, async (req, res) => {
             try {
                 const newPost = {
                     title: req.body.title,
