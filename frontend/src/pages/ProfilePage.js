@@ -10,7 +10,8 @@ const ProfilePage = () => {
         // Fetch user profile from server
         const fetchProfile = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/users/${user._id}`, {
+                // const response = await axios.get(`http://localhost:5000/users/${user._id}`, {
+                const response = await axios.get(`https://online-shop-fullstack-server.vercel.app/users/${user._id}`, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
