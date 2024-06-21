@@ -56,7 +56,6 @@ const connectToDatabase = async () => {
             }
         });
 
-
         // User login
         app.post('/login', async (req, res) => {
             const { email, password } = req.body;
@@ -75,13 +74,12 @@ const connectToDatabase = async () => {
                 }
 
                 const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' });
-                res.json({ token });
+                res.json({ _id: user._id, email: user.email, token });
             } catch (err) {
                 console.error('Error during login:', err);
                 res.status(500).send(err);
             }
         });
-
 
         // Middleware for verifying token
         const authenticateToken = (req, res, next) => {
@@ -119,6 +117,26 @@ const connectToDatabase = async () => {
                 res.status(201).json(result.ops[0]);
             } catch (err) {
                 res.status(400).send(err);
+            }
+        });
+
+        // Get user profile
+        app.get('/users/:id', authenticateToken, async (req, res) => {
+            try {
+                const userId = req.params.id;
+                if (!mongodb.ObjectId.isValid(userId)) {
+                    return res.status(400).json({ message: 'Invalid user ID' });
+                }
+
+                const objectId = new mongodb.ObjectId(userId);
+                const user = await usersCollection.findOne({ _id: objectId });
+                if (!user) {
+                    return res.status(404).json({ message: 'User not found' });
+                }
+                res.json(user);
+            } catch (err) {
+                console.error('Error fetching user:', err);
+                res.status(500).send(err);
             }
         });
 

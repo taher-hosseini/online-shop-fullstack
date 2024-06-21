@@ -23,6 +23,7 @@
     background-color: #555;
     color: #fff;
     cursor: pointer;
+    border-radius: .375rem;
 }
 .header-auth-link{
     display: flex;

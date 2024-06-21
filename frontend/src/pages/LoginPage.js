@@ -1,3 +1,4 @@
+// src/pages/LoginPage.js
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from "../contexts/AuthContext";
@@ -16,8 +17,9 @@ const LoginPage = () => {
         try {
             // const response = await axios.post('http://localhost:5000/login', { email, password });
             const response = await axios.post('https://online-shop-fullstack-server.vercel.app/login', { email, password });
-            localStorage.setItem('token', response.data.token);
-            login({ email, token: response.data.token });
+            const { _id, token } = response.data;
+            localStorage.setItem('token', token);
+            login({ _id, email, token }); // ذخیره _id به همراه ایمیل و توکن
             setMessage('Login successful');
             navigate('/'); // هدایت کاربر به صفحه خانه
         } catch (error) {
