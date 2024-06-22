@@ -19,7 +19,7 @@ const ProductPageMoreInfo = () => {
         const foundProduct = productList.find(product => product.id === parseInt(id));
         setProduct(foundProduct);
         setSelectedImage(foundProduct?.images[0]);
-    }, [id, productList]);
+    }, [id]);
 
     const handlePurchase = () => {
         if (!isLoggedIn) {
