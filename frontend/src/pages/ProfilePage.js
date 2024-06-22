@@ -20,6 +20,7 @@ const ProfilePage = () => {
             } catch (error) {
                 if (error.response && error.response.status === 401 && error.response.status === 403) {
                     // اگر توکن منقضی شده باشد
+                    console.log('time over')
                     logout();
                 } else {
                     console.error("Error fetching profile:", error);
