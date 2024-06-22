@@ -18,7 +18,7 @@ const ProfilePage = () => {
                 });
                 setProfile(response.data);
             } catch (error) {
-                if (error.response && error.response.status === 401) {
+                if (error.response && error.response.status === 401 && error.response.status === 403) {
                     // اگر توکن منقضی شده باشد
                     logout();
                 } else {
