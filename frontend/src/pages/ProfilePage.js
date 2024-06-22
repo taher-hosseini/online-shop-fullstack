@@ -18,7 +18,13 @@ const ProfilePage = () => {
                 });
                 setProfile(response.data);
             } catch (error) {
-                console.error("Error fetching profile:", error);
+                if (error.response && error.response.status === 401) {
+                    // اگر توکن منقضی شده باشد
+                    logout();
+                } else {
+                    console.error("Error fetching profile:", error);
+                }
+
             }
         };
 
