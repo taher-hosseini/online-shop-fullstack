@@ -47,7 +47,6 @@ const ProfilePage = () => {
                 <div className="col-md-6">
                     <div className="card">
                         {loading ?
-                            // loading
                             <Loading/> :
                             <>
                                 <div className="card-header">

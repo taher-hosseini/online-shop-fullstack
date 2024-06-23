@@ -1,8 +1,9 @@
 // src/pages/LoginPage.js
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
+import './LoginPage.css'
 import { AuthContext } from "../contexts/AuthContext";
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -20,28 +21,29 @@ const LoginPage = () => {
             const { _id, token } = response.data;
             localStorage.setItem('token', token);
             login({ _id, email, token }); // ذخیره _id به همراه ایمیل و توکن
-            setMessage('Login successful');
+            setMessage('ورود موفقیت آمیز');
             navigate('/'); // هدایت کاربر به صفحه خانه
         } catch (error) {
-            setMessage('Login failed');
+            setMessage('خطا در ورود');
         }
     };
 
     return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-                <div>
-                    <label>Email:</label>
-                    <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                </div>
-                <button type="submit">Login</button>
+        <div className="form-container">
+            <p className="title">ورود به حساب کاربری</p>
+            <form className="form" onSubmit={handleLogin}>
+                <input type="email" className="input" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="ایمیل"/>
+                <input type="password" className="input" value={password} onChange={(e) => setPassword(e.target.value)} required placeholder="رمز عبور"/>
+                <p className="page-link">
+                    {/*<span className="page-link-label">فراموشی رمز عبور؟</span>*/}
+                </p>
+                {message && <p className='message'>{message}</p>}
+                <button className="form-btn">ورود</button>
             </form>
-            {message && <p>{message}</p>}
+
+            <p className="sign-up-label">
+                هنوز اکانت ندارید؟<Link to="/sign-up" className="sign-up-link">ثبت نام</Link>
+            </p>
         </div>
     );
 };
