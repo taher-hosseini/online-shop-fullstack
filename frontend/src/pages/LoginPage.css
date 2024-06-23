@@ -55,18 +55,22 @@
 }
 
 .form-btn {
-    padding: 10px 15px;
-    border-radius: 20px;
-    border: 0 !important;
-    outline: 0 !important;
-    background: teal;
+    background-image: linear-gradient(to right, #485563 0%, #29323c  51%, #485563  100%);
+    padding: .4rem 2.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
     color: white;
-    cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
 }
 
-.form-btn:active {
-    box-shadow: none;
+.form-btn:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
 }
 
 .sign-up-label {
