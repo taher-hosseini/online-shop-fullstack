@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../contexts/AuthContext';
+import Loading from "../components/Loading";
 
 const ProfilePage = () => {
     const { user, logout } = useContext(AuthContext);
     const [profile, setProfile] = useState({});
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         // Fetch user profile from server
@@ -17,6 +19,7 @@ const ProfilePage = () => {
                     }
                 });
                 setProfile(response.data);
+                setLoading(false)
             } catch (error) {
                 if (error.response.status === 401 || error.response.status === 403) {
                     // اگر توکن منقضی شده باشد
@@ -43,23 +46,29 @@ const ProfilePage = () => {
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     <div className="card">
-                        <div className="card-header">
-                            <h5 className="card-title text-center">پروفایل کاربری</h5>
-                        </div>
-                        <div className="card-body">
-                            <ul className="list-group">
-                                <li className="list-group-item">
-                                    <strong>نام کاربری:</strong> {profile.username}
-                                </li>
-                                <li className="list-group-item">
-                                    <strong>ایمیل:</strong> {profile.email}
-                                </li>
-                                {/* اطلاعات دیگری که ممکن است در پروفایل نمایش داده شود */}
-                            </ul>
-                        </div>
-                        <div className="card-footer text-center">
-                            <button className="btn btn-danger" onClick={handleLogout}>خروج</button>
-                        </div>
+                        {loading ?
+                            // loading
+                            <Loading/> :
+                            <>
+                                <div className="card-header">
+                                    <h5 className="card-title text-center">پروفایل کاربری</h5>
+                                </div>
+                                <div className="card-body">
+                                    <ul className="list-group">
+                                        <li className="list-group-item">
+                                            <strong>نام کاربری:</strong> {profile.username}
+                                        </li>
+                                        <li className="list-group-item">
+                                            <strong>ایمیل:</strong> {profile.email}
+                                        </li>
+                                        {/* اطلاعات دیگری که ممکن است در پروفایل نمایش داده شود */}
+                                    </ul>
+                                </div>
+                                <div className="card-footer text-center">
+                                    <button className="btn btn-danger" onClick={handleLogout}>خروج</button>
+                                </div>
+                            </>
+                        }
                     </div>
                 </div>
             </div>
