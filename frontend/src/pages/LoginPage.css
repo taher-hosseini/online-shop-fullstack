@@ -31,6 +31,21 @@
     padding: 12px 15px;
 }
 
+.input.is-invalid{
+    border-color: red;
+}
+
+.input.is-valid{
+    border-color: green;
+}
+
+.error-message{
+    padding: 0;
+    margin: 0;
+    direction: rtl;
+    font-size: 0.7rem;
+}
+
 .page-link {
     text-decoration: underline;
     margin: 0;
