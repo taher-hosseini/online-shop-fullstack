@@ -20,18 +20,19 @@ export const ProductProvider = ({ children }) => {
                 // const response = await axios.get('http://localhost:5000/items');
                 const response = await axios.get('https://online-shop-fullstack-server.vercel.app/items');
                 setProductList(response.data);
-                setLoading(false)
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching products:', error);
+                setLoading(false); // Set loading to false in case of error
             }
         };
 
         fetchProducts();
-    }, [productList]);
+    }, []); // Only fetch once on component mount
 
 
     return (
-        <ProductContext.Provider value={{ productList, selectedCategory, setSelectedCategory ,loading }}>
+        <ProductContext.Provider value={{ productList, selectedCategory, setSelectedCategory, loading }}>
             {children}
         </ProductContext.Provider>
     );
