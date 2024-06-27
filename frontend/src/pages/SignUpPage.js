@@ -4,8 +4,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
-    const [name, setName] = useState('');
-    const [username, setUsername] = useState('');
+    const [firstName, setFirstname] = useState('');
+    const [lastName, setLastname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -16,8 +16,8 @@ const SignUpPage = () => {
         try {
             // const response = await axios.post('http://localhost:5000/register', {
             const response = await axios.post('https://online-shop-fullstack-server.vercel.app/register', {
-                name,
-                username,
+                firstName,
+                lastName,
                 email,
                 password
             });
@@ -34,24 +34,24 @@ const SignUpPage = () => {
             <h2>Sign Up</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="name">Name</label>
+                    <label htmlFor="FirstName">First Name</label>
                     <input
                         type="text"
-                        id="name"
+                        id="FirstName"
                         className="form-control"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        value={firstName}
+                        onChange={(e) => setFirstname(e.target.value)}
                         required
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="username">Username</label>
+                    <label htmlFor="LastName">Last Name</label>
                     <input
                         type="text"
-                        id="username"
+                        id="LastName"
                         className="form-control"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        value={lastName}
+                        onChange={(e) => setLastname(e.target.value)}
                         required
                     />
                 </div>

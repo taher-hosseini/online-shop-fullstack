@@ -5,6 +5,7 @@ import './LoginPage.css';
 import { AuthContext } from "../contexts/AuthContext";
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 
 const LoginPage = () => {
     const { register, handleSubmit, formState: { errors }, watch, trigger } = useForm();
@@ -23,6 +24,23 @@ const LoginPage = () => {
             navigate('/'); // هدایت کاربر به صفحه خانه
         } catch (error) {
             setMessage('خطا در ورود');
+        }
+    };
+
+    const handleGoogleLogin = async (googleData) => {
+        try {
+            // const response = await axios.post('http://localhost:5000/google-login', {
+            const response = await axios.post('https://online-shop-fullstack-server.vercel.app/google-login', {
+                token: googleData.credential,
+            });
+            const { _id, email, token } = response.data;
+            localStorage.setItem('token', token);
+            console.log(response)
+            login({ _id, email, token }); // ذخیره _id به همراه ایمیل و توکن
+            setMessage('ورود موفقیت آمیز با گوگل');
+            navigate('/'); // هدایت کاربر به صفحه خانه
+        } catch (error) {
+            setMessage('خطا در ورود با گوگل');
         }
     };
 
@@ -66,6 +84,13 @@ const LoginPage = () => {
                 <button className="form-btn">ورود</button>
             </form>
 
+            <GoogleOAuthProvider clientId="940143946792-6u6fejd3788qki06ql5blvlkncjdg2hd.apps.googleusercontent.com">
+                <GoogleLogin
+                    onSuccess={handleGoogleLogin}
+                    onError={() => setMessage('خطا در ورود با گوگل')}
+                />
+            </GoogleOAuthProvider>
+
             <p className="sign-up-label">
                 هنوز اکانت ندارید؟<Link to="/sign-up" className="sign-up-link">ثبت نام</Link>
             </p>
@@ -74,6 +99,7 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
 
 
 

@@ -55,7 +55,7 @@ const ProfilePage = () => {
                                 <div className="card-body">
                                     <ul className="list-group">
                                         <li className="list-group-item">
-                                            <strong>نام کاربری:</strong> {profile.username}
+                                            <strong>نام کاربری:</strong> {profile.firstName} {profile.lastName}
                                         </li>
                                         <li className="list-group-item">
                                             <strong>ایمیل:</strong> {profile.email}

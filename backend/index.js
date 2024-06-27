@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
+const { OAuth2Client } = require('google-auth-library'); // اضافه کردن کتابخانه Google Auth
 
 const app = express();
 app.use(cors());
@@ -13,6 +14,7 @@ app.use(bodyParser.json());
 const uri = process.env.MONGODB_URI || "mongodb+srv://taher:taher@cluster0.05owt1n.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new mongodb.MongoClient(uri);
 const secretKey = process.env.JWT_SECRET || "b0bd39a8f1a7832547581bacf112c3ea017c56d142a03cfddc422e24abbed1d2";
+const googleClientId = '940143946792-6u6fejd3788qki06ql5blvlkncjdg2hd.apps.googleusercontent.com'; // کلاینت آیدی گوگل خود را اینجا قرار دهید
 
 const connectToDatabase = async () => {
     try {
@@ -29,8 +31,8 @@ const connectToDatabase = async () => {
 
         // User registration
         app.post('/register', [
-            body('name').notEmpty().withMessage('Name is required'),
-            body('username').notEmpty().withMessage('Username is required'),
+            body('firstName').notEmpty().withMessage('Name is required'),
+            body('lastName').notEmpty().withMessage('Username is required'),
             body('email').isEmail().withMessage('Enter a valid email'),
             body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
         ], async (req, res) => {
@@ -39,13 +41,13 @@ const connectToDatabase = async () => {
                 return res.status(400).json({ errors: errors.array() });
             }
 
-            const { name, username, email, password } = req.body;
+            const { firstName, lastName, email, password } = req.body;
             const hashedPassword = await bcrypt.hash(password, 10); // هش کردن رمز عبور
 
             try {
                 const user = {
-                    name,
-                    username,
+                    firstName,
+                    lastName,
                     email,
                     password: hashedPassword
                 };
@@ -78,6 +80,38 @@ const connectToDatabase = async () => {
             } catch (err) {
                 console.error('Error during login:', err);
                 res.status(500).send(err);
+            }
+        });
+
+        // Google login
+        app.post('/google-login', async (req, res) => {
+            const { token } = req.body;
+            const client = new OAuth2Client(googleClientId);
+
+            try {
+                const ticket = await client.verifyIdToken({
+                    idToken: token,
+                    audience: googleClientId,
+                });
+                console.log(ticket)
+                const payload = ticket.getPayload();
+                const { sub, email, name, given_name ,family_name } = payload;
+
+                let user = await usersCollection.findOne({ googleId: sub });
+                if (!user) {
+                    user = {
+                        googleId: sub,
+                        firstName : given_name,
+                        lastName : family_name,
+                        email,
+                    };
+                    await usersCollection.insertOne(user);
+                }
+
+                const authToken = jwt.sign({ userId: user._id, email: user.email }, secretKey, { expiresIn: '1h' });
+                res.json({ _id: user._id, email: user.email, token: authToken });
+            } catch (err) {
+                res.status(400).json({ message: 'خطا در ورود با گوگل' });
             }
         });
 
