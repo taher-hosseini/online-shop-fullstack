@@ -44,7 +44,8 @@ const AppContent = () => {
                             <Route path="/about" element={<About />} />
                             <Route path="/login" element={isLoggedIn ? <Navigate to="/" /> : <LoginPage />} />
                             <Route path="/sign-up" element={isLoggedIn ? <Navigate to="/" /> : <SignUpPage />} />
-                            <Route path="/profile" element={<PrivateComponent><ProfilePage /></PrivateComponent>} />
+                            <Route path="/profile" element={isLoggedIn ? <ProfilePage to="/" /> : <LoginPage />} />
+                            {/*<Route path="/profile" element={<PrivateComponent><ProfilePage /></PrivateComponent>} />*/}
                         </Routes>
                     </div>
                 </div>
