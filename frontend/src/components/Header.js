@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, {useContext, useEffect, useState} from 'react';
+import { Link, useNavigate , useLocation } from 'react-router-dom';
 import './Header.css';
 import { BiLogIn } from "react-icons/bi";
 import { LuUserPlus } from "react-icons/lu";
@@ -14,20 +14,44 @@ const Header = () => {
     const navigate = useNavigate();
     const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
     const [isNavOpen, setIsNavOpen] = useState(false);
+    const [active, setActive] = useState("");
+    const location = useLocation();
+
+    useEffect(() => {
+        switch (location.pathname) {
+            case '/':
+                setActive("1");
+                break;
+            case '/products':
+                setActive("2");
+                break;
+            case '/about':
+                setActive("3");
+                break;
+            default:
+                setActive("");
+                break;
+        }
+    }, [location.pathname]);
 
     const handleLogout = () => {
         logout();
         navigate('/');
     };
 
+    const handleClick = (event) => {
+        setActive(event.target.id);
+    }
+
     const toggleNav = () => {
         setIsNavOpen(!isNavOpen);
         document.body.classList.toggle('nav-open', !isNavOpen);
     };
 
-    const closeNav = () => {
+    const closeNav = (event) => {
         setIsNavOpen(false);
         document.body.classList.remove('nav-open');
+        handleClick(event)
     };
 
     return (
@@ -59,9 +83,9 @@ const Header = () => {
                         )}
                     </div>
                     <div className={`nav ${isNavOpen ? 'active' : ''}`}>
-                        <Link to="/" onClick={closeNav}>خانه</Link>
-                        <Link to="/products" onClick={closeNav}>محصولات</Link>
-                        <Link to="/about" onClick={closeNav}>درباره ما</Link>
+                        <Link to="/" onClick={closeNav} className={ `lists ${active === "1" ? "active" : undefined}`} id={"1"}>خانه</Link>
+                        <Link to="/products" onClick={closeNav} className={ `lists ${active === "2" ? "active" : undefined}`} id={"2"}>محصولات</Link>
+                        <Link to="/about" onClick={closeNav} className={ `lists ${active === "3" ? "active" : undefined}`} id={"3"}>درباره ما</Link>
                     </div>
                     <a href="/" className='header-address'>
                         <h1>فروشگاه اینترنتی</h1>
