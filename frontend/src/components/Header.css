@@ -16,20 +16,17 @@ body.nav-open {
     overflow: hidden; /* جلوگیری از اسکرول هنگام باز شدن منو */
 }
 
-
+/* selected list style*/
 .lists {
     padding: 0.5rem;
     color: #000;
     text-decoration: none;
     transition: color 0.3s ease;
 }
-
 .lists.active {
-    /*font-weight: bold;*/
     color: #007bff;
     border-bottom: 2px solid #007bff;
 }
-
 .lists:hover {
     color: #007bff;
 }
@@ -187,6 +184,9 @@ body.nav-open {
     }
     .header-address h1 {
         font-size: 1rem;
+    }
+    .lists.active {
+        border-bottom: none;
     }
 }
 
