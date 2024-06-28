@@ -17,7 +17,6 @@ import PrivateComponent from './components/PrivateComponent';
 import { ProductProvider } from './contexts/ProductContext';
 import { AuthProvider, AuthContext } from './contexts/AuthContext';  // ایمپورت AuthContext
 import CartProvider from './contexts/CartContext';
-import Header2 from "./components/Header2";
 
 const AppContent = () => {
     const location = useLocation();
@@ -40,7 +39,6 @@ const AppContent = () => {
                             <Route path="/" element={<HomePage />} />
                             <Route path="/products" element={<ProductList />} />
                             <Route path="/product/:id" element={<ProductPageMoreInfo />} />
-                            {/*<Route path="/cart" element={isLoggedIn ? <CartPage /> : <Navigate to="/login" />} />*/}
                             <Route path="/cart" element={isLoggedIn ? <CartPage /> : <LoginPage />} />
                             <Route path="/about" element={<About />} />
                             <Route path="/login" element={isLoggedIn ? <Navigate to="/" /> : <LoginPage />} />

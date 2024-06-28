@@ -31,10 +31,10 @@ const SignUpPage = () => {
 
     return (
         <div className="container">
-            <h2>Sign Up</h2>
+            <h2>ثبت نام کاربر جدید</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="FirstName">First Name</label>
+                    <label htmlFor="FirstName">نام</label>
                     <input
                         type="text"
                         id="FirstName"
@@ -45,7 +45,7 @@ const SignUpPage = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="LastName">Last Name</label>
+                    <label htmlFor="LastName">نام خانوادگی</label>
                     <input
                         type="text"
                         id="LastName"
@@ -56,7 +56,7 @@ const SignUpPage = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">ایمیل</label>
                     <input
                         type="email"
                         id="email"
@@ -67,7 +67,7 @@ const SignUpPage = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">رمز عبور</label>
                     <input
                         type="password"
                         id="password"
@@ -78,7 +78,7 @@ const SignUpPage = () => {
                     />
                 </div>
                 {error && <p className="text-danger">{error}</p>}
-                <button type="submit" className="btn btn-primary">Sign Up</button>
+                <button type="submit" className="btn btn-primary">ثبت نام</button>
             </form>
         </div>
     );

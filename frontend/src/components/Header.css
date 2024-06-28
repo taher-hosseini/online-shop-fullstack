@@ -1,3 +1,22 @@
+/* تنظیمات عمومی */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden; /* جلوگیری از اسکرول افقی */
+    transition: background 0.3s ease;
+}
+
+body.nav-open {
+    overflow: hidden; /* جلوگیری از اسکرول هنگام باز شدن منو */
+}
+
+/* تنظیمات هدر */
 .header {
     /*background-color: var(--clr-gold);*/
     background: url("../assets/AbstractDesign.svg") center;
@@ -15,6 +34,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .header .header-wrapper button {
@@ -25,10 +45,12 @@
     cursor: pointer;
     border-radius: .375rem;
 }
-.header-auth-link{
+
+.header-auth-link {
     display: flex;
 }
-.header-auth-link a{
+
+.header-auth-link a {
     border-radius: .375rem;
     border: solid 1px var(--border-color);
     background-color: var(--clr-white);
@@ -39,7 +61,8 @@
     align-items: center;
     flex-direction: row;
 }
-.header-nav{
+
+.nav {
     background-color: var(--clr-white);
     border-radius: 2rem;
     border: solid 2px var(--border-color-gray);
@@ -48,11 +71,113 @@
     width: 25rem;
     padding: 0.2rem 0;
 }
-.header-nav a{
+
+.nav a {
     padding: 0.3rem 0.6rem;
 }
-.header-address h1{
+
+.header-address h1 {
     font-weight: bold;
     font-size: 2rem;
     margin: 0;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #000;
+    margin: 4px 0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 998; /* باید کمتر از z-index منو باشد */
+}
+
+.overlay.active {
+    display: block;
+}
+
+@media (max-width: 992px) {
+    .header-address h1 {
+        font-size: 1.3rem;
+    }
+    .header-address{
+        text-align: center;
+    }
+}
+
+/* تنظیمات برای موبایل */
+@media (max-width: 768px) {
+    .header-wrapper {
+        flex-direction: row;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav.active {
+        display: block;
+        position: absolute;
+        top: 60px; /* تغییر به بالا */
+        right: 0;
+        left: 0;
+        background: #333;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        animation: slideDown 0.3s ease;
+        z-index: 999; /* باید بیشتر از z-index overlay باشد */
+        margin: auto;
+        max-width: 100%;
+    }
+
+    .nav a {
+        display: block;
+        padding: 1rem;
+        color: #fff;
+        text-align: center;
+    }
+
+    .header-nav {
+        display: none;
+    }
+
+    .header-auth-link {
+        justify-content: center;
+    }
+
+    .header-address {
+        text-align: center;
+        margin: 1rem 0;
+    }
+    .header-address h1 {
+        font-size: 1rem;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
