@@ -40,11 +40,12 @@ const AppContent = () => {
                             <Route path="/" element={<HomePage />} />
                             <Route path="/products" element={<ProductList />} />
                             <Route path="/product/:id" element={<ProductPageMoreInfo />} />
-                            <Route path="/cart" element={isLoggedIn ? <CartPage /> : <Navigate to="/login" />} />
+                            {/*<Route path="/cart" element={isLoggedIn ? <CartPage /> : <Navigate to="/login" />} />*/}
+                            <Route path="/cart" element={isLoggedIn ? <CartPage /> : <LoginPage />} />
                             <Route path="/about" element={<About />} />
                             <Route path="/login" element={isLoggedIn ? <Navigate to="/" /> : <LoginPage />} />
                             <Route path="/sign-up" element={isLoggedIn ? <Navigate to="/" /> : <SignUpPage />} />
-                            <Route path="/profile" element={isLoggedIn ? <ProfilePage to="/" /> : <LoginPage />} />
+                            <Route path="/profile" element={isLoggedIn ? <ProfilePage/> : <LoginPage />} />
                             {/*<Route path="/profile" element={<PrivateComponent><ProfilePage /></PrivateComponent>} />*/}
                         </Routes>
                     </div>
