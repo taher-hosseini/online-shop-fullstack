@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useState} from 'react';
-import { Link, useNavigate , useLocation } from 'react-router-dom';
+import React, { useContext, useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation, matchPath } from 'react-router-dom';
 import './Header.css';
 import { BiLogIn } from "react-icons/bi";
 import { LuUserPlus } from "react-icons/lu";
@@ -12,25 +12,22 @@ const Header = () => {
     const { isLoggedIn, logout, user } = useContext(AuthContext);
     const { cart } = useContext(CartContext);
     const navigate = useNavigate();
+    const location = useLocation();
     const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [active, setActive] = useState("");
-    const location = useLocation();
 
     useEffect(() => {
-        switch (location.pathname) {
-            case '/':
-                setActive("1");
-                break;
-            case '/products':
-                setActive("2");
-                break;
-            case '/about':
-                setActive("3");
-                break;
-            default:
-                setActive("");
-                break;
+        if (location.pathname === '/') {
+            setActive("1");
+        } else if (location.pathname.startsWith('/products')) {
+            setActive("2");
+        } else if (matchPath('/product/:id', location.pathname)) {
+            setActive("2");
+        } else if (location.pathname === '/about') {
+            setActive("3");
+        } else {
+            setActive("");
         }
     }, [location.pathname]);
 
@@ -51,7 +48,7 @@ const Header = () => {
     const closeNav = (event) => {
         setIsNavOpen(false);
         document.body.classList.remove('nav-open');
-        handleClick(event)
+        handleClick(event);
     };
 
     return (
@@ -83,9 +80,9 @@ const Header = () => {
                         )}
                     </div>
                     <div className={`nav ${isNavOpen ? 'active' : ''}`}>
-                        <Link to="/" onClick={closeNav} className={ `lists ${active === "1" ? "active" : undefined}`} id={"1"}>خانه</Link>
-                        <Link to="/products" onClick={closeNav} className={ `lists ${active === "2" ? "active" : undefined}`} id={"2"}>محصولات</Link>
-                        <Link to="/about" onClick={closeNav} className={ `lists ${active === "3" ? "active" : undefined}`} id={"3"}>درباره ما</Link>
+                        <Link to="/" onClick={closeNav} className={ `lists ${active === "1" ? "active" : ""}`} id={"1"}>خانه</Link>
+                        <Link to="/products" onClick={closeNav} className={ `lists ${active === "2" ? "active" : ""}`} id={"2"}>محصولات</Link>
+                        <Link to="/about" onClick={closeNav} className={ `lists ${active === "3" ? "active" : ""}`} id={"3"}>درباره ما</Link>
                     </div>
                     <a href="/" className='header-address'>
                         <h1>فروشگاه اینترنتی</h1>
